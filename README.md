@@ -1,31 +1,72 @@
-# ESP32_Sensors
+# bno055-esp-component
 
-This repository contains idf-components for various sensors specifically designed to interact with the esp32 microcontroller running the esp-idf framework. The primary goal of this project is to provide an easy-to-use interface between popular sensor modules and the ESP32 platform.
+This repository contains an esp-idf component for bno055 imu sensor using i2c communication. An easy to use docker workflow and example project is provided to show how to include the component into any other esp-idf project.
 
 ## Content
 
-The following sensor libraries/components are currently included in this repository:
+The included bno055 component is forked from [christianjc/ESP32_Sensors](https://github.com/christianjc/ESP32_Sensors) and was only sligthly modified. However, the original component library description remains unchanged:
 
-- **BNO055 Adafruit's Breakout Board**: This library provides an interface to the BNO055 sensor via the i2c communication protocol. BNO055 is a System in Package (SiP), integrating a triaxial 14-bit accelerometer, a triaxial 16-bit gyroscope with a range of ±2000 degrees per second, a triaxial geomagnetic sensor and a 32-bit cortex M0+ microcontroller running Bosch Sensortec sensor fusion software, in a single package.
+This library provides an interface to the BNO055 sensor via the i2c communication protocol. BNO055 is a System in Package (SiP), integrating a triaxial 14-bit accelerometer, a triaxial 16-bit gyroscope with a range of ±2000 degrees per second, a triaxial geomagnetic sensor and a 32-bit cortex M0+ microcontroller running Bosch Sensortec sensor fusion software, in a single package.
+
+Furthermore, a docker workflow for the example project was included to briefly and robustly verify the component in different esp-idf versions.
 
 ## Compatibility
 
-This project has been tested on an ESP32-WROOM-32E running the esp-idf framework, provided by ESPRESSIF (version 4.3.2).
+This project was tested on the following hardware and software configurations
+
+### Hardware
+
+* Adafruit 9-DOF Absolute Orientation IMU Fusion Breakout - BNO055
+* ESP32 Module WiFi Dev Kit C Development Board with CP2102
+
+### Operating system
+
+* Ubuntu 22.04: Native support
+* Windows 11: Using [WSL2](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview) and [usbipd](https://github.com/dorssel/usbipd-win)
+
+### ESP-IDF
+
+* Releases: 5.0, 5.1
 
 ## Getting Started
 
-1. **Prerequisites**: You will need to have the ESP-IDF installed and configured on your computer. Please refer to the [official ESP-IDF installation guide](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html) to set up the environment.
+### Install Prerequisites
 
-2. **Installation**:
+* Install [docker engine](https://docs.docker.com/engine/install/)
+* Install [make](https://www.gnu.org/software/make/)
 
-    - Clone the repository: `git clone https://github.com/[your_github_username]/ESP32_Sensors.git`
-    - Navigate into the cloned project's directory: `cd ESP32_Sensors`
-    - Build the project: `idf.py build`
-    - Flash onto your ESP32 device: `idf.py -p /dev/ttyUSB0 flash` (you might need to replace `/dev/ttyUSB0` with the actual serial port of your ESP32 device)
+### Usage
 
-3. **Usage**: Once you've flashed your ESP32 device with this repository's code, you can start interacting with the BNO055 sensor. 
+* Select ESP32 target in [Makefile](Makefile#L1)
 
-Please ensure that your sensor is properly connected to your ESP32's I2C pins. Check out Adafruit's [BNO055 guide](https://learn.adafruit.com/bno055-absolute-orientation-sensor-with-raspberry-pi-and-beaglebone-black/overview) for further information about the BNO055 sensor and how to connect it.
+* Select esp-idf version in [Makefile](Makefile#L3) by consulting available docker image tags at [hub.docker.com](https://hub.docker.com/r/espressif/idf/tags)
+
+* Configure project: Menu component settings (I2C Pins, Frequency, Address) are available under `Component config`>`bno055_IMU`, Default settings are available in [Kconfig](components/bno055_IMU/Kconfig)
+
+```
+make config
+```
+
+* Build project
+
+```
+make build
+```
+
+* Flash firmware
+
+```
+make flash
+```
+
+* Clean workspace
+
+```
+make clean
+```
+## Further Work
+
+This project is currently incorporated into a ROS2 and micro-ROS application using Raspberry Pi and ESP32.
 
 ## Contributing
 

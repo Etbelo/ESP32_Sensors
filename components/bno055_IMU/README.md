@@ -4,33 +4,18 @@ This idf-component provides a C Interface for Bosch-Sensortec's BNO055 compatibl
 This code allows the esp32 to read vector measurements from the bon055 IMU sensor. If there are any questions or need further functionality
 please feel free message me.
 
-# Compatibility
-
-Tested on ESP32-WROOM-32E with BNO055 Adafruit's Breakout Board.
+NOTE: this code is not production ready yet.
 
 # Supported Interfaces
 
 I²C - fully supported
-UART will be supported in the future.
 
-# Getting Started
+## I2C Wiring
 
-NOTE: this code is not production ready yet.
+Wiring must be appropriately changed based on configured settings in [Kconfig](Kconfig)
 
-find the esp-idf folder and clone this repository
+* ADR -> logic HIGH (3v0) enables bno055 default address (0x29), logic LOW enables alternative address (0x28)
 
-cd <YOUR_ESP-IDF_FOLDER_LOCATION>
+* SCL -> SCL (Default: GPIO_NUM_22)
 
-git clone https://github.com/christianjc/ESP32_Sensors.git
-
-for more details see examples/
-
-# Wiring
-
-I2C
-
-ADR -> 3v0 (HIGH) -> logic high enables bno055 default address (0x29)
-
-SCL -> SCL (Default: GPIO_NUM_19)
-
-SDA -> SDA (Default: GPIO_NUM_18)
+* SDA -> SDA (Default: GPIO_NUM_21)
