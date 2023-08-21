@@ -1,0 +1,27 @@
+menu "bno055_IMU"
+
+    config I2C_MASTER_SCL_IO
+        int "I2C clock gpio pin"
+        default 22
+        help 
+        Clock pin for BNO055 i2c peripheral
+
+    config I2C_MASTER_SDA_IO
+        int "I2C data gpio pin"
+        default 21
+        help 
+        Data pin for BNO055 i2c peripheral
+
+    config I2C_MASTER_FREQ_HZ
+        int "I2C frequency"
+        default 400000
+        help 
+        Frequency for BNO055 i2c peripheral
+    
+    config BNO055_ADDRESS
+        int "I2C address"
+        default 40
+        help 
+        Address for BNO055 i2c peripheral
+  
+endmenu

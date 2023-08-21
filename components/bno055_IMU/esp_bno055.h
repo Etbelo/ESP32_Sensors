@@ -43,12 +43,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-/** BNO055 Address Alternative **/
-#define BNO055_ADDRESS_A (0x28) // This requires the ADR pin on the bno055 to be low
-/** BNO055 Address Default **/
-#define BNO055_ADDRESS_DEFAULT (0x29) // This requires the ADR pin to the bno055 to be high
 /** BNO055 Adress being used **/
-#define BNO055_ADDRESS BNO055_ADDRESS_DEFAULT
+#define BNO055_ADDRESS CONFIG_BNO055_ADDRESS
+
 /** BNO055 ID **/
 #define BNO055_ID (0xA0)
 
@@ -58,10 +55,10 @@
 #define NUM_BNO055_EULER_REGISTERS (6)
 
 /** I2C configuration settings **/
-#define I2C_MASTER_SCL_IO (19)      //CONFIG_I2C_MASTER_SCL      /*!< GPIO number used for I2C master clock */
-#define I2C_MASTER_SDA_IO (18)      //CONFIG_I2C_MASTER_SDA      /*!< GPIO number used for I2C master data  */
+#define I2C_MASTER_SCL_IO CONFIG_I2C_MASTER_SCL_IO      //CONFIG_I2C_MASTER_SCL      /*!< GPIO number used for I2C master clock */
+#define I2C_MASTER_SDA_IO CONFIG_I2C_MASTER_SDA_IO      //CONFIG_I2C_MASTER_SDA      /*!< GPIO number used for I2C master data  */
 #define I2C_MASTER_NUM I2C_NUM_0    /*!< I2C master i2c port number */
-#define I2C_MASTER_FREQ_HZ 400000   /*!< I2C master clock frequency */
+#define I2C_MASTER_FREQ_HZ CONFIG_I2C_MASTER_FREQ_HZ   /*!< I2C master clock frequency */
 #define I2C_MASTER_TX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
 #define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
 #define I2C_MASTER_TIMEOUT_MS 1000  /*!< I2C master timeout */
